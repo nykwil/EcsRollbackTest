@@ -1,13 +1,13 @@
 ﻿using Unity.Entities;
 
-namespace EcsWar {
-
+namespace EcsWar
+{
     [System.Serializable]
-    public struct Player : IComponentData {
+    public struct Player : IComponentData
+    {
         public int FireRate;
         public float FireSpeed;
 
-        // Data
         [UnityEngine.HideInInspector]
         public int ElapsedTime;
 

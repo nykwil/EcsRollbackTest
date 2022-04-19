@@ -1,28 +1,28 @@
 using UnityEngine;
 
-namespace Tests {
+namespace Tests
+{
+    public class RollbackTests : MonoBehaviour
+    {
+        private void OnGUI()
+        {
+            if (GUILayout.Button("Enable Rollback Tests"))
+            {
+                CustomUpdateSystem.Instance.EnableRollbackTest();
+            }
+            if (GUILayout.Button("Toggle Simulating"))
+            {
+                CustomUpdateSystem.Simulating = !CustomUpdateSystem.Simulating;
+            }
+            if (GUILayout.Button("Save World "))
+            {
+                CustomUpdateSystem.Instance.SaveSimulationWorld();
+            }
 
-    public class RollbackTests : MonoBehaviour {
-
-        [InspectorButton]
-        private void EnableAutoMode() {
-            CustomUpdateSystem.Instance.SaveSimulationWorld();
-            CustomUpdateSystem.Instance.autoMode = true;
-        }
-
-        [InspectorButton]
-        public void ToggleSimulating() {
-            CustomUpdateSystem.simulating = !CustomUpdateSystem.simulating;
-        }
-
-        [InspectorButton]
-        private void SaveSimulationWorld() {
-            CustomUpdateSystem.Instance.SaveSimulationWorld();
-        }
-
-        [InspectorButton]
-        private void RestoreSimulationWorld() {
-            CustomUpdateSystem.Instance.RestoreSimulationWorld();
+            if (GUILayout.Button("Restore World "))
+            {
+                CustomUpdateSystem.Instance.RestoreSimulationWorld();
+            }
         }
     }
 }

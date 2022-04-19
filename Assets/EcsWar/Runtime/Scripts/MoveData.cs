@@ -1,10 +1,11 @@
 ﻿using Unity.Entities;
 using Unity.Mathematics;
 
-namespace EcsWar {
-
+namespace EcsWar
+{
     [GenerateAuthoringComponent]
-    public struct MoveData : IComponentData {
+    public struct MoveData : IComponentData
+    {
         public float3 Angular;
         public float3 Linear;
     }

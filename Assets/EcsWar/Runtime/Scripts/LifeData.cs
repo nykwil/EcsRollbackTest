@@ -1,9 +1,10 @@
 ﻿using Unity.Entities;
 
-namespace EcsWar {
-
+namespace EcsWar
+{
     [GenerateAuthoringComponent]
-    public struct LifeData : IComponentData {
+    public struct LifeData : IComponentData
+    {
         public int Life;
     }
 }
