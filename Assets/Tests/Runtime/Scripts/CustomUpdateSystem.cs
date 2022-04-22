@@ -6,6 +6,7 @@ public class CustomUpdateSystem : IDisposable
 {
     public static CustomUpdateSystem Instance { get; private set; }
     public static bool Simulating { get; set; }
+    public int TargetFrame { get; private set; }
 
     private ComponentSystemGroup initGroup;
     private ComponentSystemGroup simGroup;
@@ -15,6 +16,9 @@ public class CustomUpdateSystem : IDisposable
     private World activeWorld;
 
     private bool rollbackTest;
+
+    private int lockStepFrame;
+    private int activeFrame;
 
     public CustomUpdateSystem(World world)
     {
@@ -38,7 +42,12 @@ public class CustomUpdateSystem : IDisposable
     {
         if (simGroup.Created && Simulating)
         {
-            simGroup.Update();
+            ++TargetFrame;
+            while (TargetFrame > activeFrame)
+            {
+                ++activeFrame;
+                simGroup.Update();
+            }
 
             if (rollbackTest)
             {
@@ -65,11 +74,14 @@ public class CustomUpdateSystem : IDisposable
     public void SaveSimulationWorld()
     {
         CopyWorld(lockStepWorld, activeWorld);
+        lockStepFrame = activeFrame;
     }
 
     public void RestoreSimulationWorld()
     {
         CopyWorld(activeWorld, lockStepWorld);
+        activeFrame = lockStepFrame;
+        Debug.Log("Rolling back to " + activeFrame);
     }
 
     public static void CopyWorld(World toWorld, World fromWorld)
