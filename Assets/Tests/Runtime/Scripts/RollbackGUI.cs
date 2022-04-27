@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Tests
 {
-    public class RollbackTests : MonoBehaviour
+    public class RollbackGUI : MonoBehaviour
     {
         private void OnGUI()
         {
@@ -17,6 +17,16 @@ namespace Tests
                 {
                     CustomUpdateSystem.Instance.EnableRollbackTest();
                 }
+                GUILayout.BeginHorizontal();
+                if (GUILayout.Button("Save World"))
+                {
+                    CustomUpdateSystem.Instance.SaveSimulationWorld();
+                }
+                if (GUILayout.Button("Restore World"))
+                {
+                    CustomUpdateSystem.Instance.RestoreSimulationWorld();
+                }
+                GUILayout.EndHorizontal();
             }
         }
     }

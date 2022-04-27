@@ -1,5 +1,5 @@
 {
-    "name": "UnityGGPO.Tests.Runtime",
+    "name": "Tests.Runtime",
     "rootNamespace": "",
     "references": [
         "GUID:734d92eba21c94caba915361bd5ac177",
@@ -11,7 +11,7 @@
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
-    "allowUnsafeCode": true,
+    "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,

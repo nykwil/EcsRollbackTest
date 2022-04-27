@@ -1,13 +1,14 @@
 # EcsRollbackTest
 
-## EcsWar Folder 
-This is minimal components and systems for a shooting game.
-
-## Tests Folder 
+## Assets/Tests Folder (start here)
 This is where the rollback and bootstrap code lives.
 
-## Boostrap.cs
-Builds the world and create update system
+### Boostrap.cs
+Builds the worlds and create update system
 
-## CustomUpdateSystem.cs
-This is where the ticking and rollback occurs
+### CustomUpdateSystem.cs
+This is where the ticking and rollback occurs.
+
+## Assets/EcsWar Folder 
+This is minimal components and systems for a shooting game.
+

@@ -1,23 +1,21 @@
 {
-    "name": "UnityGGPO.EcsWar.Runtime",
+    "name": "EcsWar.Authoring",
     "rootNamespace": "",
     "references": [
-        "Unity.Entities",
-        "Unity.Transforms",
-        "Unity.Mathematics",
-        "Unity.Collections",
-        "Unity.Jobs",
         "Unity.Burst",
+        "Unity.Collections",
+        "Unity.Entities",
         "Unity.Entities.Hybrid",
-        "UnityGGPO.SharedGame.Runtime",
-        "UnityGGPO.Plugin.Runtime"
+        "Unity.Mathematics",
+        "Unity.Transforms",
+        "EcsWar.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false
