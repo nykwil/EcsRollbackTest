@@ -86,7 +86,7 @@ public class CustomUpdateSystem : IDisposable
 
     public static void CopyWorld(World toWorld, World fromWorld)
     {
-        //snapShotWorld.EntityManager.DestroyAndResetAllEntities();
+        toWorld.EntityManager.DestroyAndResetAllEntities();
         toWorld.EntityManager.CopyAndReplaceEntitiesFrom(fromWorld.EntityManager);
         toWorld.SetTime(new Unity.Core.TimeData(fromWorld.Time.ElapsedTime, fromWorld.Time.DeltaTime));
     }

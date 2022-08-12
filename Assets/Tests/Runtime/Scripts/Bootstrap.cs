@@ -22,7 +22,7 @@ public class Bootstrap
 
         ScriptBehaviourUpdateOrder.RemoveWorldFromCurrentPlayerLoop(defaultWorld);
 
-        CustomUpdateSystem customUpdateSystem = new CustomUpdateSystem(defaultWorld);
+        var customUpdateSystem = new CustomUpdateSystem(defaultWorld);
 
         AppendToUpdate(customUpdateSystem.GetType(), customUpdateSystem.Initialization, typeof(UnityEngine.PlayerLoop.Initialization));
         AppendToUpdate(customUpdateSystem.GetType(), customUpdateSystem.FixedUpdate, typeof(UnityEngine.PlayerLoop.FixedUpdate));
@@ -40,18 +40,16 @@ public class Bootstrap
 
             if (system.type == updateType)
             {
-                var fixedUpdateSystem = system;
-
-                var fixedUpdateSystems = new List<UnityEngine.LowLevel.PlayerLoopSystem>(system.subSystemList);
+                var updateSystem = new List<UnityEngine.LowLevel.PlayerLoopSystem>(system.subSystemList);
 
                 var customPlayerLoop = new UnityEngine.LowLevel.PlayerLoopSystem();
                 customPlayerLoop.type = customUpdater;
                 customPlayerLoop.updateDelegate = updateDelegate;
 
-                fixedUpdateSystems.Add(customPlayerLoop);
+                updateSystem.Add(customPlayerLoop);
 
-                fixedUpdateSystem.subSystemList = fixedUpdateSystems.ToArray();
-                playerLoopSystem.subSystemList[i] = fixedUpdateSystem;
+                system.subSystemList = updateSystem.ToArray();
+                playerLoopSystem.subSystemList[i] = system;
             }
         }
         UnityEngine.LowLevel.PlayerLoop.SetPlayerLoop(playerLoopSystem);
