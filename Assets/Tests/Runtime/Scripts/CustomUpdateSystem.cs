@@ -25,9 +25,9 @@ public class CustomUpdateSystem : IDisposable
         Instance = this;
         activeWorld = world;
         lockStepWorld = new World("lockStepWorld", WorldFlags.Simulation);
-        initGroup = world.GetExistingSystem<InitializationSystemGroup>();
-        simGroup = world.GetExistingSystem<SimulationSystemGroup>();
-        presGroup = world.GetExistingSystem<PresentationSystemGroup>();
+        initGroup = world.GetExistingSystemManaged<InitializationSystemGroup>();
+        simGroup = world.GetExistingSystemManaged<SimulationSystemGroup>();
+        presGroup = world.GetExistingSystemManaged<PresentationSystemGroup>();
     }
 
     public void Initialization()

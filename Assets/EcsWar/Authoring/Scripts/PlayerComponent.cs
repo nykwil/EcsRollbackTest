@@ -1,23 +1,19 @@
-﻿using System.Collections.Generic;
-using Unity.Entities;
+﻿using Unity.Entities;
 using UnityEngine;
 
 namespace EcsWar {
 
-    public class PlayerComponent : MonoBehaviour, IConvertGameObjectToEntity, IDeclareReferencedPrefabs {
+    public class PlayerComponent : MonoBehaviour {
         public Player player;
         public GameObject BoltPrefab = null;
+    }
 
-        public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem) {
-            var p = player;
-            p.BoltPrefabEntity = BoltPrefab != null ? conversionSystem.GetPrimaryEntity(BoltPrefab) : Entity.Null;
-            dstManager.AddComponentData(entity, p);
-        }
+    public class PlayerComponentBaker : Baker<PlayerComponent> {
 
-        public void DeclareReferencedPrefabs(List<GameObject> referencedPrefabs) {
-            if (BoltPrefab != null) {
-                referencedPrefabs.Add(BoltPrefab);
-            }
+        public override void Bake(PlayerComponent authoring) {
+            var p = authoring.player;
+            p.BoltPrefabEntity = GetEntity(authoring.BoltPrefab);
+            AddComponent(p);
         }
     }
 }
