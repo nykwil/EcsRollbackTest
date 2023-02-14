@@ -1,5 +1,6 @@
 ﻿using System;
 using Unity.Entities;
+using Unity.Entities.Serialization;
 using UnityEngine;
 
 public class CustomUpdateSystem : IDisposable
@@ -89,6 +90,20 @@ public class CustomUpdateSystem : IDisposable
         toWorld.EntityManager.DestroyAndResetAllEntities();
         toWorld.EntityManager.CopyAndReplaceEntitiesFrom(fromWorld.EntityManager);
         toWorld.SetTime(new Unity.Core.TimeData(fromWorld.Time.ElapsedTime, fromWorld.Time.DeltaTime));
+    }
+
+    public static void CopyWorld2(World toWorld, World fromWorld)
+    {
+        MemoryBinaryWriter memoryWriter = new MemoryBinaryWriter();
+        SerializeUtility.SerializeWorld(toWorld.EntityManager, memoryWriter, out object[] unityObjects);
+
+        unsafe
+        {
+            MemoryBinaryReader memoryReader = new MemoryBinaryReader(memoryWriter.Data, memoryWriter.Length);
+            ExclusiveEntityTransaction transaction = toWorld.EntityManager.BeginExclusiveEntityTransaction();
+            SerializeUtility.DeserializeWorld(transaction, memoryReader, unityObjects);
+            toWorld.EntityManager.EndExclusiveEntityTransaction();
+        }
     }
 
     public void EnableRollbackTest()

@@ -18,7 +18,7 @@ public class Bootstrap
         }
 
         defaultWorld = DefaultWorldInitialization.Initialize("Default World", false);
-        GameObjectSceneUtility.AddGameObjectSceneReferences();
+ //       GameObjectSceneUtility .AddGameObjectSceneReferences();
 
         ScriptBehaviourUpdateOrder.RemoveWorldFromCurrentPlayerLoop(defaultWorld);
 
